@@ -1,0 +1,16 @@
+[
+{
+  "modid": "tombmanypluginswearablebackpacks",
+  "name": "TombManyPlugins Wearable Backpacks",
+  "description": "A plugin for Tomb Many Graves 2 adding compatibility with Wearable Backpacks",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["M4thG33k"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
