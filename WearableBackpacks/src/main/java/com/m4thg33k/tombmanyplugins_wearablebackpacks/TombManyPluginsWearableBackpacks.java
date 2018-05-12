@@ -65,8 +65,8 @@ public class TombManyPluginsWearableBackpacks {
         }
 
         @Override
-        public boolean pregrabLogic() {
-            return false;
+        public boolean pregrabLogic(EntityPlayer player) {
+            return true; // Backpacks have no logic to stop graves
         }
 
         @Override
