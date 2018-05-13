@@ -1,0 +1,16 @@
+[
+{
+  "modid": "tombmanypluginscosmeticarmorreworked",
+  "name": "TombManyPlugins Cosmetic Armor Reworked",
+  "description": "A plugin for Tomb Many Graves 2 adding compatibility with Cosmetic Armor Reworked",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["M4thG33k"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
