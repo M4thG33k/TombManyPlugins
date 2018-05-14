@@ -111,6 +111,12 @@ public class TombManyPluginsTheBetweenlands {
 
                             for (int i = 0; i < graveItems.getSizeInventory(); i++) {
                                 ItemStack graveItem = graveItems.getStackInSlot(i);
+
+                                if (type == EnumEquipmentInventory.AMULET && i >= equipmentCapability.getAmuletSlots()){
+                                    SpecialInventoryHelper.dropItem(player, graveItem);
+                                    continue;
+                                }
+
                                 if (! graveItem.isEmpty()) {
                                     ItemStack playerItem = currentInventory.getStackInSlot(i).copy();
 
