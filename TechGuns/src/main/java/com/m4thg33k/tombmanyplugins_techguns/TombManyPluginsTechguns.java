@@ -61,7 +61,7 @@ public class TombManyPluginsTechguns {
         }
 
         @Override
-        public boolean pregrabLogic() {
+        public boolean pregrabLogic(EntityPlayer player) {
             return true;
         }
 

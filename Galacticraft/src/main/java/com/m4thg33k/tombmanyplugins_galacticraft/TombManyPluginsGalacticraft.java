@@ -62,7 +62,7 @@ public class TombManyPluginsGalacticraft {
         }
 
         @Override
-        public boolean pregrabLogic() {
+        public boolean pregrabLogic(EntityPlayer player) {
             return true;
         }
 
@@ -84,7 +84,7 @@ public class TombManyPluginsGalacticraft {
                         ItemStack playerItem = inventoryGC.getStackInSlot(i).copy();
 
                         if (playerItem.isEmpty()){
-                            // No problem, just but the grave item in!
+                            // No problem, just put the grave item in!
                             inventoryGC.setInventorySlotContents(i, graveItem);
                         } else if (shouldForce){
                             // Slot is blocked, but we're forcing it
