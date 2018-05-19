@@ -1,9 +1,8 @@
 package com.m4thg33k.tombmanyplugins_backpacks;
 
-import com.m4thg33k.tombmanygraves.api.events.EventRegisterSpecialInventory;
-import com.m4thg33k.tombmanygraves.api.inventory.ISpecialInventory;
-import com.m4thg33k.tombmanygraves.api.inventory.SpecialInventoryHelper;
-import com.m4thg33k.tombmanygraves.api.inventory.TransitionInventory;
+import com.m4thg33k.tombmanygraves2api.api.inventory.AbstractSpecialInventory;
+import com.m4thg33k.tombmanygraves2api.api.inventory.SpecialInventoryHelper;
+import com.m4thg33k.tombmanygraves2api.api.inventory.TransitionInventory;
 import de.eydamos.backpack.data.PlayerSave;
 import de.eydamos.backpack.helper.BackpackHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,10 +10,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -29,23 +26,19 @@ public class TombManyPluginsBackpacks {
     public static final String MODID = "tombmanypluginsbackpacks";
     public static final String VERSION = "@VERSION@";
     public static final String MODNAME = "TombManyPluginsBackpacks";
-    public static final String DEPENDENCIES = "required-after:forge@[14.23.3.2655,);required-after:backpack@[3.0.2,);required-after:tombmanygraves@[1.12-4.1.0,)";
+    public static final String DEPENDENCIES = "required-after:forge@[14.23.3.2655,);required-after:backpack@[3.0.2,);required-after:tombmanygraves2api@[1.12-4.1.0,);required-after:tombmanygraves@[1.12-4.1.0,)";
 
     @Mod.Instance
     public static TombManyPluginsBackpacks INSTANCE = new TombManyPluginsBackpacks();
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e) {
-        MinecraftForge.EVENT_BUS.register(INSTANCE);
-    }
-
-    @SubscribeEvent
-    public void registerSpecialInventories(EventRegisterSpecialInventory e) throws Exception {
-        e.registerSpecialInventory(new BackpackSpecialInventory());
+        // Register the inventory
+        new BackpackSpecialInventory();
     }
 
 
-    public class BackpackSpecialInventory implements ISpecialInventory {
+    public class BackpackSpecialInventory extends AbstractSpecialInventory {
         private static final String BASE = "Base";
         private static final String STACK = "Stack";
 

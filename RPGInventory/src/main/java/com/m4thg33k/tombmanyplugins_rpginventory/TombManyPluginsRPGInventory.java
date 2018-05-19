@@ -1,19 +1,14 @@
 package com.m4thg33k.tombmanyplugins_rpginventory;
 
-import com.m4thg33k.tombmanygraves.api.events.EventRegisterSpecialInventory;
-import com.m4thg33k.tombmanygraves.api.inventory.ISpecialInventory;
-import com.m4thg33k.tombmanygraves.api.inventory.SpecialInventoryHelper;
-import com.m4thg33k.tombmanygraves.api.inventory.TransitionInventory;
+import com.m4thg33k.tombmanygraves2api.api.inventory.AbstractSpecialInventory;
+import com.m4thg33k.tombmanygraves2api.api.inventory.SpecialInventoryHelper;
+import com.m4thg33k.tombmanygraves2api.api.inventory.TransitionInventory;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import subaraki.rpginventory.capability.playerinventory.RpgInventoryData;
 
@@ -30,22 +25,18 @@ public class TombManyPluginsRPGInventory {
     public static final String MODID = "tombmanypluginsrpginventory";
     public static final String VERSION = "@VERSION@";
     public static final String MODNAME = "TombManyPluginsRPGInventory";
-    public static final String DEPENDENCIES = "required-after:forge@[14.23.3.2655,);required-after:rpginventory@[1.12.2,);required-after:tombmanygraves@[1.12-4.1.0,)";
+    public static final String DEPENDENCIES = "required-after:forge@[14.23.3.2655,);required-after:rpginventory@[1.12.2,);required-after:tombmanygraves2api@[1.12-4.1.0,);required-after:tombmanygraves@[1.12-4.1.0,)";
 
     @Mod.Instance
     public static TombManyPluginsRPGInventory INSTANCE = new TombManyPluginsRPGInventory();
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e) {
-        MinecraftForge.EVENT_BUS.register(INSTANCE);
+        new RPGInventorySpecialInventory();
     }
 
-    @SubscribeEvent
-    public void registerSpecialInventories(EventRegisterSpecialInventory e) throws Exception {
-        e.registerSpecialInventory(new RPGInventorySpecialInventory());
-    }
 
-    class RPGInventorySpecialInventory implements ISpecialInventory{
+    class RPGInventorySpecialInventory extends AbstractSpecialInventory{
         @Override
         public String getUniqueIdentifier() {
             return "RPGInventory";

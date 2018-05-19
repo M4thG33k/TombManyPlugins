@@ -4,15 +4,12 @@ package com.m4thg33k.tombmanyplugins_inventorypets;
 import com.inventorypets.InventoryPets;
 import com.inventorypets.capabilities.CapabilityRefs;
 import com.inventorypets.capabilities.ICapabilityPlayer;
-import com.m4thg33k.tombmanygraves.api.events.EventRegisterSpecialInventory;
-import com.m4thg33k.tombmanygraves.api.inventory.ISpecialInventory;
+import com.m4thg33k.tombmanygraves2api.api.inventory.AbstractSpecialInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -34,16 +31,12 @@ public class TombManyPluginsInventoryPets {
 
     @Mod.EventHandler
     public void init (FMLInitializationEvent e){
-        MinecraftForge.EVENT_BUS.register(INSTANCE);
-    }
-
-    @SubscribeEvent
-    public void registerSpecialInventories(EventRegisterSpecialInventory e) throws Exception {
-        e.registerSpecialInventory(new InventoryPetsSpecialInventory());
+        new InventoryPetsSpecialInventory();
     }
 
 
-    class InventoryPetsSpecialInventory implements ISpecialInventory{
+
+    class InventoryPetsSpecialInventory extends AbstractSpecialInventory{
         @Override
         public String getUniqueIdentifier() {
             return "InventoryPets";

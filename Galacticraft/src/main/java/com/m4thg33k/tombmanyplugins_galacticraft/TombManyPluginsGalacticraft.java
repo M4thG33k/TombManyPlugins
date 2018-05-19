@@ -1,9 +1,8 @@
 package com.m4thg33k.tombmanyplugins_galacticraft;
 
-import com.m4thg33k.tombmanygraves.api.events.EventRegisterSpecialInventory;
-import com.m4thg33k.tombmanygraves.api.inventory.ISpecialInventory;
-import com.m4thg33k.tombmanygraves.api.inventory.SpecialInventoryHelper;
-import com.m4thg33k.tombmanygraves.api.inventory.TransitionInventory;
+import com.m4thg33k.tombmanygraves2api.api.inventory.AbstractSpecialInventory;
+import com.m4thg33k.tombmanygraves2api.api.inventory.SpecialInventoryHelper;
+import com.m4thg33k.tombmanygraves2api.api.inventory.TransitionInventory;
 import micdoodle8.mods.galacticraft.api.inventory.AccessInventoryGC;
 import micdoodle8.mods.galacticraft.api.inventory.IInventoryGC;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,10 +10,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -30,22 +27,18 @@ public class TombManyPluginsGalacticraft {
     public static final String MODID = "tombmanypluginsgalacticraft";
     public static final String VERSION = "@VERSION@";
     public static final String MODNAME = "TombManyPlugins Galacticraft";
-    public static final String DEPENDENCIES = "required-after:forge@[14.23.3.2655,);required-after:galacticraftcore@[4.0.1.176,);required-after:tombmanygraves@[1.12-4.1.0,)";
+    public static final String DEPENDENCIES = "required-after:forge@[14.23.3.2655,);required-after:galacticraftcore@[4.0.1.176,);required-after:tombmanygraves2api@[1.12-4.1.0,);required-after:tombmanygraves@[1.12-4.1.0,)";
 
     @Mod.Instance
     public static TombManyPluginsGalacticraft INSTANCE = new TombManyPluginsGalacticraft();
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e){
-        MinecraftForge.EVENT_BUS.register(INSTANCE);
+        new GalacticraftSpecialInventory();
     }
 
-    @SubscribeEvent
-    public void registerSpecialInventories(EventRegisterSpecialInventory e) throws Exception{
-        e.registerSpecialInventory(new GalacticraftSpecialInventory());
-    }
 
-    class GalacticraftSpecialInventory implements ISpecialInventory{
+    class GalacticraftSpecialInventory extends AbstractSpecialInventory{
         @Override
         public String getUniqueIdentifier() {
             return "GalacticraftInventory";

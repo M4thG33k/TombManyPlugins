@@ -1,19 +1,16 @@
 package com.m4thg33k.tombmanyplugins_cosmeticarmorreworked;
 
-import com.m4thg33k.tombmanygraves.api.events.EventRegisterSpecialInventory;
-import com.m4thg33k.tombmanygraves.api.inventory.ISpecialInventory;
-import com.m4thg33k.tombmanygraves.api.inventory.SpecialInventoryHelper;
-import com.m4thg33k.tombmanygraves.api.inventory.TransitionInventory;
+import com.m4thg33k.tombmanygraves2api.api.inventory.AbstractSpecialInventory;
+import com.m4thg33k.tombmanygraves2api.api.inventory.SpecialInventoryHelper;
+import com.m4thg33k.tombmanygraves2api.api.inventory.TransitionInventory;
 import lain.mods.cos.CosmeticArmorReworked;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -28,23 +25,19 @@ public class TombManyPluginsCosmeticArmorReworked {
     public static final String MODID = "tombmanypluginscosmeticarmorreworked";
     public static final String VERSION = "@VERSION@";
     public static final String MODNAME = "TombManyPlugins Wearable Backpacks";
-    public static final String DEPENDENCIES = "required-after:forge@[14.23.3.2655,);required-after:cosmeticarmorreworked;required-after:tombmanygraves@[1.12-4.1.0,)";
+    public static final String DEPENDENCIES = "required-after:forge@[14.23.3.2655,);required-after:cosmeticarmorreworked;required-after:tombmanygraves2api@[1.12-4.1.0,);required-after:tombmanygraves@[1.12-4.1.0,)";
 
     @Mod.Instance
     public static TombManyPluginsCosmeticArmorReworked INSTANCE = new TombManyPluginsCosmeticArmorReworked();
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e) {
-        MinecraftForge.EVENT_BUS.register(INSTANCE);
-    }
-
-    @SubscribeEvent
-    public void registerSpecialInventories(EventRegisterSpecialInventory e) throws Exception {
-        e.registerSpecialInventory(new CosmeticArmorSpecialInventory());
+        new CosmeticArmorSpecialInventory();
     }
 
 
-    public class CosmeticArmorSpecialInventory implements ISpecialInventory {
+
+    public class CosmeticArmorSpecialInventory extends AbstractSpecialInventory {
 
         @Override
         public String getUniqueIdentifier() {

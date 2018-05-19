@@ -1,9 +1,9 @@
 package com.m4thg33k.tombmanyplugins_thebetweenlands;
 
-import com.m4thg33k.tombmanygraves.api.events.EventRegisterSpecialInventory;
-import com.m4thg33k.tombmanygraves.api.inventory.ISpecialInventory;
-import com.m4thg33k.tombmanygraves.api.inventory.SpecialInventoryHelper;
-import com.m4thg33k.tombmanygraves.api.inventory.TransitionInventory;
+
+import com.m4thg33k.tombmanygraves2api.api.inventory.AbstractSpecialInventory;
+import com.m4thg33k.tombmanygraves2api.api.inventory.SpecialInventoryHelper;
+import com.m4thg33k.tombmanygraves2api.api.inventory.TransitionInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -31,22 +31,18 @@ public class TombManyPluginsTheBetweenlands {
     public static final String MODID = "tombmanypluginsthebetweenlands";
     public static final String VERSION = "@VERSION@";
     public static final String MODNAME = "TombManyPluginsTheBetweenlands";
-    public static final String DEPENDENCIES = "required-after:forge@[14.23.3.2655,);required-after:thebetweenlands@[3.3.8,);required-after:tombmanygraves@[1.12-4.1.0,)";
+    public static final String DEPENDENCIES = "required-after:forge@[14.23.3.2655,);required-after:thebetweenlands@[3.3.8,);required-after:tombmanygraves2api@[1.12-4.1.0,);required-after:tombmanygraves@[1.12-4.1.0,)";
 
     @Mod.Instance
     public static TombManyPluginsTheBetweenlands INSTANCE = new TombManyPluginsTheBetweenlands();
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e) {
-        MinecraftForge.EVENT_BUS.register(INSTANCE);
+        new BetweenlandsEquipmentInventory();
     }
 
-    @SubscribeEvent
-    public void registerSpecialInventories(EventRegisterSpecialInventory e) throws Exception {
-        e.registerSpecialInventory(new BetweenlandsEquipmentInventory());
-    }
 
-    class BetweenlandsEquipmentInventory implements ISpecialInventory {
+    class BetweenlandsEquipmentInventory extends AbstractSpecialInventory {
         @Override
         public String getUniqueIdentifier() {
             return "TheBetweenlandsEquipment";
